@@ -1,24 +1,21 @@
 package com.rest.couchbase.service;
 
+import static com.couchbase.client.java.query.Select.select;
+import static com.couchbase.client.java.query.dsl.Expression.x;
+
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.couchbase.client.java.Bucket;
+import com.couchbase.client.java.query.AsyncN1qlQueryResult;
 import com.couchbase.client.java.query.N1qlQuery;
-import com.couchbase.client.java.query.N1qlQueryResult;
-import com.couchbase.client.java.query.N1qlQueryRow;
 import com.couchbase.client.java.query.Statement;
 import com.rest.couchbase.model.Result;
-
-import static com.couchbase.client.java.query.Select.select;
-import static com.couchbase.client.java.query.dsl.Expression.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 @Service
 public class BeerServiceImpl implements BeerService {
@@ -33,6 +30,7 @@ public class BeerServiceImpl implements BeerService {
     }
 
 	
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Result findBeersByState(final String state) {
 		
@@ -43,24 +41,16 @@ public class BeerServiceImpl implements BeerService {
 				.where(x("state").eq(stateN1QLValue));
 		
 		LOGGER.info("Executing Query: {}", selectBeerFromTexas.toString());
-		
-        N1qlQueryResult result = bucket.query(N1qlQuery.simple(selectBeerFromTexas));
-        
-		// TODO Auto-generated method stub
-        return Result.of(extractResultOrThrow(result), selectBeerFromTexas.toString());
+
+        return Result.of(executeQuery(selectBeerFromTexas), selectBeerFromTexas.toString());
 	}
 	
-    private static List<Map<String, Object>> extractResultOrThrow(N1qlQueryResult result) {
-        if (!result.finalSuccess()) {
-            LOGGER.warn("Query returned with errors: " + result.errors());
-            //throw new DataRetrievalFailureException("Query error: " + result.errors());
-        }
-
-        List<Map<String, Object>> content = new ArrayList<Map<String, Object>>();
-        for (N1qlQueryRow row : result) {
-            content.add(row.value().toMap());
-        }
-        return content;
-    }	
-
+	private List<Map<String, Object>> executeQuery(Statement statementQuery) {
+		return  bucket.async().query(N1qlQuery.simple(statementQuery))
+			    .flatMap(AsyncN1qlQueryResult::rows)
+			    .map(result -> result.value().toMap())
+			    .toList()
+			    .toBlocking()
+			    .single();
+	}
 }
