@@ -22,6 +22,17 @@ mvn spring-boot:run
 /apache-jmeter-3.2/bin
 sh jmeter.sh
 
-The script can be found in src/test/java/RestTest.jmx
+The script can be found in src/main/java/resources/RestTest.jmx
+
+### Web proxy parameters :
+
+By default Spring Boot use the port 8080
+
+For Couchbase configuration, you can modify the file src/main/java/resources/applications.properties
+
+storage.host=10.112.163.101 (couchbase ip adress)
+storage.bucket=beer-sample
+storage.username=Administrator
+storage.password=couchbase
 
 Enjoy
