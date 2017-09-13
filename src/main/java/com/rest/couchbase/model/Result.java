@@ -1,4 +1,4 @@
-package com.orange.couchbase.model;
+package com.rest.couchbase.model;
 
 public class Result<T> implements IValue {
 

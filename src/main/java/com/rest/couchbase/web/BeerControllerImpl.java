@@ -1,4 +1,4 @@
-package com.orange.couchbase.web;
+package com.rest.couchbase.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.orange.couchbase.model.IValue;
-import com.orange.couchbase.model.Error;
-import com.orange.couchbase.service.BeerService;
+import com.rest.couchbase.model.IValue;
+import com.rest.couchbase.model.Error;
+import com.rest.couchbase.service.BeerService;
 
 @RestController
 @RequestMapping("/api/beers")

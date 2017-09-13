@@ -1,6 +1,6 @@
-package com.orange.couchbase.service;
+package com.rest.couchbase.service;
 
-import com.orange.couchbase.model.Result;
+import com.rest.couchbase.model.Result;
 
 public interface BeerService {
 

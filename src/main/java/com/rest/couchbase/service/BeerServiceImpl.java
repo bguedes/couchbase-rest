@@ -1,4 +1,4 @@
-package com.orange.couchbase.service;
+package com.rest.couchbase.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +11,7 @@ import com.couchbase.client.java.query.N1qlQuery;
 import com.couchbase.client.java.query.N1qlQueryResult;
 import com.couchbase.client.java.query.N1qlQueryRow;
 import com.couchbase.client.java.query.Statement;
-import com.orange.couchbase.model.Result;
+import com.rest.couchbase.model.Result;
 
 import static com.couchbase.client.java.query.Select.select;
 import static com.couchbase.client.java.query.dsl.Expression.*;

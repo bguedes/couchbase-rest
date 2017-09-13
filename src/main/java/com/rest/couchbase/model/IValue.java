@@ -1,3 +1,3 @@
-package com.orange.couchbase.model;
+package com.rest.couchbase.model;
 
 public interface IValue { }

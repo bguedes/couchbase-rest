@@ -1,4 +1,4 @@
-package com.orange.couchbase.config;
+package com.rest.couchbase.config;
 
 import com.couchbase.client.java.Bucket;
 import com.couchbase.client.java.Cluster;
