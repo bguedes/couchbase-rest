@@ -23,8 +23,10 @@
         <spring-framework.version>4.3.5.RELEASE</spring-framework.version>
         <commons-lang3.version>3.5</commons-lang3.version>
 -->
-        <!--  <couchbase.client.version>2.4.7</couchbase.client.version> -->
+        <!--  <couchbase.client.version>2.4.7</couchbase.client.version> 
         <couchbase.client.version>2.5.0</couchbase.client.version>
+        -->
+        <couchbase.client.version>2.2.3</couchbase.client.version>
     </properties>
 
     <dependencies>
